@@ -1,9 +1,9 @@
 <?php
 // Import file koneksi Database
 require_once('Koneksi.php');
-
+$id_user =  $_GET['user'];
 //membuat sql $query
-$sql = "SELECT * FROM pesanan";
+$sql = "SELECT * FROM pesanan where sales = $id_user";
 
 //mendapatkan Berhasil
 $r = mysqli_query($con,$sql);

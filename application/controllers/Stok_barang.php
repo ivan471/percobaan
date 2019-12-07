@@ -8,8 +8,12 @@ class Stok_barang extends CI_Controller {
   }
   public function index($id)
   {
-    $data['input'] = $this->model_barang->tampil_barang_input($id);
-    $this->load->template('stok_barang', $data);
+    if (isset($this->session->status)) {
+      $data['input'] = $this->model_barang->tampil_barang_input($id);
+      $this->load->template('stok_barang', $data);
+    }else {
+      redirect(base_url().'login');
+    }
   }
   public function view_barang()
   {

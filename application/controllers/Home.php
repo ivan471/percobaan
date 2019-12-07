@@ -8,15 +8,15 @@ class Home extends CI_Controller {
     $this->load->model('model_barang');
   }
 
-	public function index()
-	{
+  public function index()
+  {
     if (isset($this->session->status)) {
       $data['pesanan']= $this->model_barang->pesanan();
       $this->load->template('index' , $data);
     }else {
       redirect(base_url().'login');
     }
-	}
+  }
   public function detail_pesanan($id)
   {
     if (isset($this->session->status)) {
@@ -44,18 +44,31 @@ class Home extends CI_Controller {
   {
     $username = $this->input->post('username');
     $pass = $this->input->post('password');
-    if ($user = $this->model_data->signin($username)) {
-      if ($user['password'] == $pass) {
-        $this->session->status = $user['status'];
-          $this->session->nama = $user['nama'];
-          $this->session->uid = $user['id'];
-        redirect(base_url());
-      }else{
+    $pass1 = md5($pass);
+    $user = $this->model_data->signin( $username,$pass1 );
+    if( isset($user)){
+      // password cocok, login berhasil
+      // simpan data session untuk mengenali user di setiap halaman
+      $this->session->status = $user['status'];
+      $this->session->nama = $user['nama'];
+      $this->session->uid = $user['id'];
+      // kembali ke halaman depan
+      redirect('/');
+    } else {
       echo "Login Gagal";
     }
-  }else {
-    echo "Tidak Terdaftar";
-  }
+    // if ($user = $this->model_data->signin($username)) {
+    //   if ($user['password'] == $pass) {
+    //     $this->session->status = $user['status'];
+    //     $this->session->nama = $user['nama'];
+    //     $this->session->uid = $user['id'];
+    //     redirect(base_url());
+    //   }else{
+    //     echo "Login Gagal";
+    //   }
+    // }else {
+    //   echo "Tidak Terdaftar";
+    // }
   }
   public function Logout()
   {

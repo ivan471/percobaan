@@ -6,16 +6,24 @@ class Stok_bahan extends CI_Controller {
     parent::__construct();
     $this->load->model('model_bahan');
   }
-	public function index($id)
-	{
-    $data['input'] = $this->model_bahan->tampil_bahan_input($id);
-    $this->load->template('stok_bahan', $data);
-	}
+  public function index($id)
+  {
+    if (isset($this->session->status)) {
+      $data['input'] = $this->model_bahan->tampil_bahan_input($id);
+      $this->load->template('stok_bahan', $data);
+    }else {
+      redirect(base_url().'login');
+    }
+  }
   public function view_bahan()
-	{
-    $data['bahan']= $this->model_bahan->tampil_bahan();
-		$this->load->template('view_bahan' , $data);
-	}
+  {
+    if (isset($this->session->status)) {
+      $data['bahan']= $this->model_bahan->tampil_bahan();
+      $this->load->template('view_bahan' , $data);
+    }else {
+      redirect(base_url().'login');
+    }
+  }
   public function simpan($id){
     $this->model_bahan->simpan($id);
     redirect('/view_bahan');

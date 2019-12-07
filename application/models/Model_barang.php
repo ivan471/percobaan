@@ -167,7 +167,7 @@ class Model_barang extends CI_Model
 
   }
   public function pesanan(){
-    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.id order by tanggal_input asc");
+    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.id where pesanan.status='0' order by tanggal_input asc");
     return $query->result_array();
   }
   public function detail_pesanan($id){

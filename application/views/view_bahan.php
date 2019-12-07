@@ -16,7 +16,7 @@
         <td><?= $z['nama_bhn']; ?></td>
         <td><?= $z['jumlah']; ?></td>
         <td><?= $z['satuan']; ?></td>
-        <td><a class="btn btn-primary" href="<?= base_url().'bahan/'.$z['id_bahan'] ?>">Tambah Stok</a></td>
+        <td><a class="btn btn-info" href="<?= base_url().'bahan/'.$z['id_bahan'] ?>">Tambah Stok</a></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
