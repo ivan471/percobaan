@@ -16,7 +16,7 @@
 		    <?php foreach ($pesanan as $z) :?>
 		    <tr>
 		      <th scope="row"><?= $z['id_pesanan']; ?></th>
-		      <td><?= $z['nama']; ?></td>
+		      <td><?= $z['nama_cust']; ?></td>
 		      <td><?= tgl_indo($z['tanggal_pengantaran']); ?></td>
 		      <td><?= $z['jam']; ?></td>
 						<td><?php if ($z['status'] == 0) {?>

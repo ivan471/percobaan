@@ -75,10 +75,10 @@ class Home extends CI_Controller {
     $this->session->sess_destroy();
     redirect('/login');
   }
-  public function riwayat(){
+  public function history(){
     if (isset($this->session->status)) {
       $data['pesanan']= $this->model_barang->pesanan();
-      $this->load->template('index' , $data);
+      $this->load->template('history' , $data);
     }else {
       redirect(base_url().'login');
     }

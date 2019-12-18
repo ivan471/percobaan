@@ -13,7 +13,7 @@ class Model_data extends CI_Model
     $this->db->insert('user', $data);
   }
   public function signin($username,$pass1){
-    $sql= "SELECT * FROM user where username='".$username."' and password='".$pass1."' ";
+    $sql= "SELECT * FROM user where username='".$username."' and password='".$pass1."' and status!='Sales' ";
     $query = $this->db->query($sql);
     if(!empty($query->row_array() ) ){
       return $query->row_array();

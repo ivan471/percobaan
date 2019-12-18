@@ -39,7 +39,7 @@
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-		<a class="btn btn-primary" href="<?= base_url().'pengantaran/'.$pesanan['id_pesanan'] ?>">Pengantaran</a>
+		<a class="btn btn-primary" href="<?= base_url().'cetak/'.$pesanan['id_pesanan'] ?>">Cetak Faktur</a>
 	</div>
 </div>
 <?php

@@ -27,7 +27,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Jumlah</label>
-          <input type="text" class="form-control" name="jumlah" placeholder="jumlah" min="0" value="0" required>
+          <input type="number" class="form-control" name="jumlah" placeholder="jumlah" min="0" value="0" required>
         </div>
       </div>
       <button class="btn btn-primary" type="submit" name="button">Produksi</button>

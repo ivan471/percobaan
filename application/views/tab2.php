@@ -31,9 +31,7 @@
           <select name="status" class="form-control">
             <option selected>Pilih</option>
             <option>Admin</option>
-            <option>Customer</option>
             <option>Sales</option>
-            <option>Marketing</option>
             <option>Produksi</option>
           </select>
         </div>

@@ -11,7 +11,6 @@ $route['simpan_bahan/(:any)']				= 'stok_bahan/simpan/$1';
 $route['Logout']										= 'home/Logout';
 $route['produksi/(:num)/(:any)'] 					= 'stok_barang/produksi/$1/$2';
 $route['produksi_stok/(:any)'] 			= 'stok_barang/produksi_stok/$1';
-$route['pengantaran/(:any)'] 					= 'home/pengantaran/$1';
 $route['tambah_stok/(:any)'] 			= 'stok_barang/tambah_stok/$1';
 $route['riwayat'] 									= 'home/riwayat';
 $route['proses/(:any)'] 						= 'stok_barang/proses_produksi/$1';
@@ -19,6 +18,7 @@ $route['view_barang'] 							= 'stok_barang/view_barang';
 $route['view_bahan'] 								= 'stok_bahan/view_bahan';
 $route['simpan'] 										= 'home/simpan';
 $route['daftar'] 										= 'home/daftar';
+$route['cetak/(:any)'] 										= 'faktur/index/$1';
 
 
 $route['default_controller'] 				= 'home';
