@@ -19,13 +19,17 @@
 		      <td><?= $z['nama_cust']; ?></td>
 		      <td><?= tgl_indo($z['tanggal_pengantaran']); ?></td>
 		      <td><?= $z['jam']; ?></td>
-						<td><?php if ($z['status'] == 0) {?>
+						<td><?php if ($z['status_pesanan'] == 0) {?>
 								Belum Diproses
 							<?php }else {?>
 								Selesai
 							<?php } ?>
 						</td>
+						<?php if ($z['status_pesanan'] == 0) {?>
 						<td><a class="btn btn-outline-primary" href="<?= base_url().'detail_pesanan/'.$z['id_pesanan'] ?>">Detail Pesanan</a></td>
+					<?php }else {?>
+						<td><a class="btn btn-outline-primary" href="<?= base_url().'cetak/'.$z['id_pesanan'] ?>">Lihat Faktur</a></td>
+					<?php } ?>
 		    </tr>
 		  <?php endforeach; ?>
 		  </tbody>

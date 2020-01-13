@@ -30,8 +30,8 @@ class Stok_barang extends CI_Controller {
     $stok= $this->db->query("SELECT * from stok_barang where id_barang='".$id2."'");
     $query1 = $stok->row();
     $jumlah_stok = $query1->jumlah;
-    if ($jumlah_pesanan > $jumlah_stok ) {
-      $data['total'] = $jumlah_pesanan - $jumlah_stok;
+      if ($jumlah_pesanan > $jumlah_stok ) {
+      $data['total'] =  $jumlah_pesanan-$jumlah_stok;
     }else {
       $data['total'] = $jumlah_pesanan;
     }
@@ -43,7 +43,7 @@ class Stok_barang extends CI_Controller {
     $jumlah = $this->input->post('jumlah');
     $id_pesanan = $this->input->post('id_pesanan');
     $this->model_barang->produksi($id,$jumlah,$id_pesanan);
-    redirect('/detail_pesanan/'.$id);
+    redirect('/detail_pesanan'.'/'.$id);
   }
   public function produksi_stok($id){
     if (isset($this->session->status)) {

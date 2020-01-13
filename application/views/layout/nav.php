@@ -25,7 +25,7 @@
       <font size="3">Menu</font>
     </div>
 
-    <?php  if ($this->session->uid == "1") {?>
+    <?php  if ($this->session->status == "Admin") {?>
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url().'daftar' ?>">
             <span><font size="3">Register</font></span>

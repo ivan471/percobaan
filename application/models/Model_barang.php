@@ -20,150 +20,368 @@ class Model_barang extends CI_Model
     $this->db->update('stok_barang' , $data);
   }
   public function produksi($id,$jumlah,$id1 = null){
-    // $query = $this->db->query("SELECT * from resep where id_bahan='".$id."'");
-    // $row = $query->row();
-    // $id_barang = $row->id_bahan;
     if ($id == "01" || $id == "02" || $id == "10") {
-      $tepung = '10';
-      $kanji = '20';
-      $garam = '30';
-      $cuka = '30';
-      $caramel = '10';
-      $sakarin = '20';
-      $TM = '22';
-      $gula_cair = '25';
-      $potazium_sorbate = '20';
-      $benzoat = '20';
-      $hitung_tepung = $tepung * $jumlah;
-      $hitung_kanji = $kanji * $jumlah;
-      $hitung_garam = $garam * $jumlah;
-      $hitung_cuka = $cuka * $jumlah;
-      $hitung_caramel = $caramel * $jumlah;
-      $hitung_sakarin = $sakarin * $jumlah;
-      $hitung_TM = $TM * $jumlah;
-      $hitung_gulacair = $gulacair * $jumlah;
-      $hitung_potaziumsorbate = $potaziumsorbate * $jumlah;
-      $hitung_benzoat = $benzoat * $jumlah;
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='01'");
+      $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
       $row = $query->row();
-      $stok_tepung = $row->jumlah;
+      $stok = $row->jumlah;
+      if ($jumlah < $stok) {
+        $hasil = $stok-$jumlah;
+        $data = array('status' => '1');
+        $this->db->where('id_pesanan',$id1);
+        $this->db->where('id_barang',$id);
+        $this->db->update('tb_data_pesanan', $data);
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='02'");
-      $row = $query->row();
-      $stok_kanji = $row->jumlah;
+        $data = array('jumlah' => $hasil);
+        $this->db->where('id_barang',$id);
+        $this->db->update('stok_barang', $data);
+      }else {
+        $tepung = '10';
+        $kanji = '20';
+        $garam = '30';
+        $cuka = '30';
+        $caramel = '10';
+        $sakarin = '20';
+        $TM = '22';
+        $gula_cair = '25';
+        $potazium_sorbate = '20';
+        $benzoat = '20';
+        $hitung_tepung = $tepung * $jumlah;
+        $hitung_kanji = $kanji * $jumlah;
+        $hitung_garam = $garam * $jumlah;
+        $hitung_cuka = $cuka * $jumlah;
+        $hitung_caramel = $caramel * $jumlah;
+        $hitung_sakarin = $sakarin * $jumlah;
+        $hitung_TM = $TM * $jumlah;
+        $hitung_gulacair = $gulacair * $jumlah;
+        $hitung_potaziumsorbate = $potaziumsorbate * $jumlah;
+        $hitung_benzoat = $benzoat * $jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='01'");
+        $row = $query->row();
+        $stok_tepung = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='03'");
-      $row = $query->row();
-      $stok_garam = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='02'");
+        $row = $query->row();
+        $stok_kanji = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='04'");
-      $row = $query->row();
-      $stok_cuka = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='03'");
+        $row = $query->row();
+        $stok_garam = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='05'");
-      $row = $query->row();
-      $stok_caramel = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='04'");
+        $row = $query->row();
+        $stok_cuka = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='06'");
-      $row = $query->row();
-      $stok_sakarin = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='05'");
+        $row = $query->row();
+        $stok_caramel = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='07'");
-      $row = $query->row();
-      $stok_TM = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='06'");
+        $row = $query->row();
+        $stok_sakarin = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='08'");
-      $row = $query->row();
-      $stok_gulacair = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='07'");
+        $row = $query->row();
+        $stok_TM = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='09'");
-      $row = $query->row();
-      $stok_potaziumsorbate = $row->jumlah;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='08'");
+        $row = $query->row();
+        $stok_gulacair = $row->jumlah;
 
-      $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='10'");
-      $row = $query->row();
-      $stok_benzoat = $row->jumlah;
-      if ($stok_tepung >= $hitung_tepung && $stok_kanji >= $hitung_kanji && $stok_garam >= $hitung_garam && $stok_cuka >= $hitung_cuka && $stok_caramel >= $hitung_caramel && $stok_sakarin >= $hitung_sakarin && $stok_TM >= $hitung_TM && $stok_gulacair >= $hitung_gulacair && $stok_potaziumsorbate >= $hitung_potaziumsorbate && $stok_benzoat >= $hitung_benzoat) {
-        $total_tepung = $stok_tepung - $hitung_tepung;
-        $total_kanji = $stok_kanji - $hitung_kanji;
-        $total_garam = $stok_garam - $hitung_garam;
-        $total_cuka = $stok_cuka - $hitung_cuka;
-        $total_caramel = $stok_caramel - $hitung_caramel;
-        $total_sakarin = $stok_tepung - $hitung_sakarin;
-        $total_TM = $stok_TM - $hitung_TM;
-        $total_gulacair = $stok_gulacair - $hitung_gulacair;
-        $total_potaziumsorbate = $stok_potaziumsorbate - $hitung_potaziumsorbate;
-        $total_benzoat = $stok_benzoat - $hitung_benzoat;
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='09'");
+        $row = $query->row();
+        $stok_potaziumsorbate = $row->jumlah;
 
+        $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='10'");
+        $row = $query->row();
+        $stok_benzoat = $row->jumlah;
+        if ($stok_tepung >= $hitung_tepung && $stok_kanji >= $hitung_kanji && $stok_garam >= $hitung_garam && $stok_cuka >= $hitung_cuka && $stok_caramel >= $hitung_caramel && $stok_sakarin >= $hitung_sakarin && $stok_TM >= $hitung_TM && $stok_gulacair >= $hitung_gulacair && $stok_potaziumsorbate >= $hitung_potaziumsorbate && $stok_benzoat >= $hitung_benzoat) {
+          $total_tepung = $stok_tepung - $hitung_tepung;
+          $total_kanji = $stok_kanji - $hitung_kanji;
+          $total_garam = $stok_garam - $hitung_garam;
+          $total_cuka = $stok_cuka - $hitung_cuka;
+          $total_caramel = $stok_caramel - $hitung_caramel;
+          $total_sakarin = $stok_tepung - $hitung_sakarin;
+          $total_TM = $stok_TM - $hitung_TM;
+          $total_gulacair = $stok_gulacair - $hitung_gulacair;
+          $total_potaziumsorbate = $stok_potaziumsorbate - $hitung_potaziumsorbate;
+          $total_benzoat = $stok_benzoat - $hitung_benzoat;
+
+          $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
+          $row = $query->row();
+          $jmlh = $row->jumlah;
+          $total_barang = $jmlh + $jumlah;
+          $data = array('jumlah' => $total_barang);
+          $this->db->where('id_barang',$id);
+          $this->db->update('stok_barang', $data);
+
+          $data = array('jumlah' => $total_tepung);
+          $this->db->where('id_bahan','01');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_kanji);
+          $this->db->where('id_bahan','02');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_garam);
+          $this->db->where('id_bahan','03');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_cuka);
+          $this->db->where('id_bahan','04');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_caramel);
+          $this->db->where('id_bahan','05');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_sakarin);
+          $this->db->where('id_bahan','06');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_TM);
+          $this->db->where('id_bahan','07');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_gulacair);
+          $this->db->where('id_bahan','08');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_potaziumsorbate);
+          $this->db->where('id_bahan','09');
+          $this->db->update('stok_bahan', $data);
+
+          $data = array('jumlah' => $total_benzoat);
+          $this->db->where('id_bahan','10');
+          $this->db->update('stok_bahan', $data);
+        }
+      }
+      }else if ($id == "07" || $id == "08") {
         $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
         $row = $query->row();
-        $jmlh = $row->jumlah;
-        $total_barang = $jmlh + $jumlah;
-        if (isset($id1)) {
-          $query = $this->db->query("SELECT * from tb_data_pesanan where id_barang ='".$id."'");
-          $row = $query->row();
-          $jmlh_pesanan = $row->jumlah;
-
-          if ($jmlh_pesanan >= $jmlh) {
-            $stok = 0;
-          }else {
-            $stok = $jmlh - $jmlh_pesanan;
-          }
+        $stok = $row->jumlah;
+        if ($jumlah < $stok) {
+          $hasil = $stok-$jumlah;
           $data = array('status' => '1');
           $this->db->where('id_pesanan',$id1);
           $this->db->where('id_barang',$id);
           $this->db->update('tb_data_pesanan', $data);
 
-          $data = array('jumlah' => $stok);
+          $data = array('jumlah' => $hasil);
           $this->db->where('id_barang',$id);
           $this->db->update('stok_barang', $data);
         }else {
-          $data = array('jumlah' => $total_barang);
+          $tepung = '10';
+          $garam = '30';
+          $cuka = '30';
+          $bawang ='20';
+          $ubi_jalar ='20';
+
+          $hitung_tepung = $tepung * $jumlah;
+          $hitung_garam = $garam * $jumlah;
+          $hitung_cuka = $cuka * $jumlah;
+          $hitung_bawang = $bawang * $jumlah;
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='01'");
+          $row = $query->row();
+          $stok_tepung = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='03'");
+          $row = $query->row();
+          $stok_garam = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='04'");
+          $row = $query->row();
+          $stok_cuka = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='15'");
+          $row = $query->row();
+          $stok_bawang = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='19'");
+          $row = $query->row();
+          $stok_ubi_jalar = $row->jumlah;
+
+          if ($stok_tepung >= $hitung_tepung &&  $stok_garam >= $hitung_garam && $stok_cuka >= $hitung_cuka && $stok_bawang >= $hitung_bawang && $stok_ubi_jalar >= $hitung_ubi_jalar) {
+            $total_tepung = $stok_tepung - $hitung_tepung;
+            $total_garam = $stok_garam - $hitung_garam;
+            $total_cuka = $stok_cuka - $hitung_cuka;
+            $total_bawang = $stok_bawang - $hitung_bawang;
+            $total_ubi_jalar = $stok_ubi_jalar - $hitung_ubi_jalar;
+
+            $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
+            $row = $query->row();
+            $jmlh = $row->jumlah;
+            $total_barang = $jmlh + $jumlah;
+            $data = array('jumlah' => $total_barang);
+            $this->db->where('id_barang',$id);
+            $this->db->update('stok_barang', $data);
+
+            $data = array('jumlah' => $total_tepung);
+            $this->db->where('id_bahan','01');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_garam);
+            $this->db->where('id_bahan','03');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_cuka);
+            $this->db->where('id_bahan','04');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_bawang);
+            $this->db->where('id_bahan','15');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_ubi_jalar);
+            $this->db->where('id_bahan','19');
+            $this->db->update('stok_bahan', $data);
+
+          }
+        }
+      }else if ($id == "03" || $id == "04" || $id == "17") {
+        $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
+        $row = $query->row();
+        $stok = $row->jumlah;
+        if ($jumlah < $stok) {
+          $hasil = $stok-$jumlah;
+          $data = array('status' => '1');
+          	$array = array('id_pesanan' => $id1, 'id_barang' => $id);
+          $this->db->where($array);
+          $this->db->update('tb_data_pesanan', $data);
+
+          $data = array('jumlah' => $hasil);
           $this->db->where('id_barang',$id);
           $this->db->update('stok_barang', $data);
+        }else {
+          $tepung = '10';
+          $kanji = '20';
+          $garam = '30';
+          $cuka = '30';
+          $caramel = '10';
+          $sakarin = '20';
+          $TM = '22';
+          $gula_cair = '25';
+          $potazium_sorbate = '20';
+          $benzoat = '20';
+          $hitung_tepung = $tepung * $jumlah;
+          $hitung_kanji = $kanji * $jumlah;
+          $hitung_garam = $garam * $jumlah;
+          $hitung_cuka = $cuka * $jumlah;
+          $hitung_caramel = $caramel * $jumlah;
+          $hitung_sakarin = $sakarin * $jumlah;
+          $hitung_TM = $TM * $jumlah;
+          $hitung_gulacair = $gulacair * $jumlah;
+          $hitung_potaziumsorbate = $potaziumsorbate * $jumlah;
+          $hitung_benzoat = $benzoat * $jumlah;
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='01'");
+          $row = $query->row();
+          $stok_tepung = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='02'");
+          $row = $query->row();
+          $stok_kanji = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='03'");
+          $row = $query->row();
+          $stok_garam = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='04'");
+          $row = $query->row();
+          $stok_cuka = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='05'");
+          $row = $query->row();
+          $stok_caramel = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='06'");
+          $row = $query->row();
+          $stok_sakarin = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='07'");
+          $row = $query->row();
+          $stok_TM = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='08'");
+          $row = $query->row();
+          $stok_gulacair = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='09'");
+          $row = $query->row();
+          $stok_potaziumsorbate = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='10'");
+          $row = $query->row();
+          $stok_benzoat = $row->jumlah;
+
+          $query = $this->db->query("SELECT * from stok_bahan where id_bahan ='20'");
+          $row = $query->row();
+          $stok_jeruk_purut = $row->jumlah;
+          if ($stok_tepung >= $hitung_tepung && $stok_kanji >= $hitung_kanji && $stok_garam >= $hitung_garam && $stok_cuka >= $hitung_cuka && $stok_caramel >= $hitung_caramel && $stok_sakarin >= $hitung_sakarin && $stok_TM >= $hitung_TM && $stok_gulacair >= $hitung_gulacair && $stok_potaziumsorbate >= $hitung_potaziumsorbate && $stok_benzoat >= $hitung_benzoat && $stok_jeruk_purut >= $hitung_jeruk_purut) {
+            $total_tepung = $stok_tepung - $hitung_tepung;
+            $total_kanji = $stok_kanji - $hitung_kanji;
+            $total_garam = $stok_garam - $hitung_garam;
+            $total_cuka = $stok_cuka - $hitung_cuka;
+            $total_caramel = $stok_caramel - $hitung_caramel;
+            $total_sakarin = $stok_tepung - $hitung_sakarin;
+            $total_TM = $stok_TM - $hitung_TM;
+            $total_gulacair = $stok_gulacair - $hitung_gulacair;
+            $total_potaziumsorbate = $stok_potaziumsorbate - $hitung_potaziumsorbate;
+            $total_benzoat = $stok_benzoat - $hitung_benzoat;
+            $total_jeruk_purut = $stok_jeruk_purut - $hitung_jeruk_purut;
+
+            $query = $this->db->query("SELECT * from stok_barang where id_barang ='".$id."'");
+            $row = $query->row();
+            $jmlh = $row->jumlah;
+            $total_barang = $jmlh + $jumlah;
+            $data = array('jumlah' => $total_barang);
+            $this->db->where('id_barang',$id);
+            $this->db->update('stok_barang', $data);
+
+            $data = array('jumlah' => $total_tepung);
+            $this->db->where('id_bahan','01');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_kanji);
+            $this->db->where('id_bahan','02');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_garam);
+            $this->db->where('id_bahan','03');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_cuka);
+            $this->db->where('id_bahan','04');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_caramel);
+            $this->db->where('id_bahan','05');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_sakarin);
+            $this->db->where('id_bahan','06');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_TM);
+            $this->db->where('id_bahan','07');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_gulacair);
+            $this->db->where('id_bahan','08');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_potaziumsorbate);
+            $this->db->where('id_bahan','09');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_benzoat);
+            $this->db->where('id_bahan','10');
+            $this->db->update('stok_bahan', $data);
+
+            $data = array('jumlah' => $total_jeruk_purut);
+            $this->db->where('id_bahan','20');
+            $this->db->update('stok_bahan', $data);
+          }
         }
-        $data = array('jumlah' => $total_tepung);
-        $this->db->where('id_bahan','01');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_kanji);
-        $this->db->where('id_bahan','02');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_garam);
-        $this->db->where('id_bahan','03');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_cuka);
-        $this->db->where('id_bahan','04');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_caramel);
-        $this->db->where('id_bahan','05');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_sakarin);
-        $this->db->where('id_bahan','06');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_TM);
-        $this->db->where('id_bahan','07');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_gulacair);
-        $this->db->where('id_bahan','08');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_potaziumsorbate);
-        $this->db->where('id_bahan','09');
-        $this->db->update('stok_bahan', $data);
-
-        $data = array('jumlah' => $total_benzoat);
-        $this->db->where('id_bahan','10');
-        $this->db->update('stok_bahan', $data);
-      }
-    }
-    else if ($id == "15" || $id == "16") {
+    }else if ($id == "15" || $id == "16") {
       $tepung = '50';
       $kanji = '100';
       $garam = '150';
@@ -643,7 +861,7 @@ class Model_barang extends CI_Model
         $this->db->update('stok_bahan', $data);
       }
     }
-    else if ($id == "14") {
+    else if ($id == "14" || $id == "13") {
       $tepung = '1200';
       $garam = '300';
       $cuka = '300';
@@ -747,7 +965,7 @@ class Model_barang extends CI_Model
         $total_hanoman = $stok_hanoman - $hitung_hanoman;
         $total_bawang = $stok_bawang - $hitung_bawang;
         $total_sunset_yellow = $stok_sunset_yellow - $hitung_sunset_yellow;
-        $total_ponceau = $stok_sunset_ponceau - $hitung_ponceau;
+        $total_ponceau = $stok_ponceau - $hitung_ponceau;
         $total_tartrazine = $stok_tartrazine - $tartrazine;
         $total_lombok_biji = $stok_lombok_biji - $lombok_biji;
 
@@ -947,7 +1165,7 @@ class Model_barang extends CI_Model
         $total_hanoman = $stok_hanoman - $hitung_hanoman;
         $total_bawang = $stok_bawang - $hitung_bawang;
         $total_sunset_yellow = $stok_sunset_yellow - $hitung_sunset_yellow;
-        $total_ponceau = $stok_sunset_ponceau - $hitung_ponceau;
+        $total_ponceau = $stok_ponceau - $hitung_ponceau;
         $total_tartrazine = $stok_tartrazine - $tartrazine;
         $total_lombok_biji = $stok_lombok_biji - $lombok_biji;
 
@@ -1045,11 +1263,11 @@ class Model_barang extends CI_Model
     }
   }
   public function pesanan(){
-    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.id where pesanan.status='0' order by tanggal_input asc");
+    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.username order by status_pesanan asc , tanggal_input desc ");
     return $query->result_array();
   }
   public function detail_pesanan($id){
-    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.id where id_pesanan='".$id."'");
+    $query = $this->db->query("SELECT * from pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.username where id_pesanan='".$id."'");
     return $query->row_array();
   }
   public function brg_pesanan($id){
@@ -1065,9 +1283,8 @@ class Model_barang extends CI_Model
     return $query->row_array();
   }
   public function pengantaran($id){
-    $data = array('status' => '1');
+    $data = array('status_pesanan' => '1');
     $this->db->where('id_pesanan', $id);
     $this->db->update('pesanan', $data);
   }
-
 }

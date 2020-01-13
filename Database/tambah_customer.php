@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $alamat = $_POST['alamat'];
   $telepon = $_POST['telepon'];
   //pembuatan syntax SQL
-  $sql = "INSERT INTO customer (nama_cust,alamat,telepon) VALUES ('$nama_customer','$almat','$telepon')";
+  $sql = "INSERT INTO customer (nama_cust,alamat,telepon) VALUES ('$nama_customer','$alamat','$telepon')";
 
   //import File Koneksi Database
   require_once('Koneksi.php');

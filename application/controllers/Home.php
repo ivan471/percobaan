@@ -57,18 +57,6 @@ class Home extends CI_Controller {
     } else {
       echo "Login Gagal";
     }
-    // if ($user = $this->model_data->signin($username)) {
-    //   if ($user['password'] == $pass) {
-    //     $this->session->status = $user['status'];
-    //     $this->session->nama = $user['nama'];
-    //     $this->session->uid = $user['id'];
-    //     redirect(base_url());
-    //   }else{
-    //     echo "Login Gagal";
-    //   }
-    // }else {
-    //   echo "Tidak Terdaftar";
-    // }
   }
   public function Logout()
   {

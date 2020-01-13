@@ -9,18 +9,21 @@ class Faktur extends CI_Controller {
 		$this->load->model('model_barang');
 	}
 	public function index($id){
-		$this->model_barang->pengantaran($id);
-		$data = $this->db->query("SELECT * FROM pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.id where id_pesanan='".$id."'");
-		$ssd = $data->row();
-		$nama_cust = $ssd->nama_cust;
-		$alamat = $ssd->alamat;
-		$data = $this->db->query("SELECT * FROM tb_data_pesanan inner join stok_barang using(id_barang) where id_pesanan='".$id."'");
-		$query = $data->result_array();
 		$pdf = new FPDF('p','mm','A4');
 		// membuat halaman baru
 		$pdf->AddPage();
 		// setting jenis font yang akan digunakan
 		$pdf->SetFont('Arial','B',16);
+		$data = $this->db->query("SELECT * FROM pesanan inner join customer using(id_cust) inner join user on pesanan.sales = user.username where id_pesanan='".$id."'");
+		$ssd = $data->row();
+		$nama_cust = $ssd->nama_cust;
+		$alamat = $ssd->alamat;
+		$status_pesanan = $ssd->status_pesanan;
+		if ($status_pesanan == "0") {
+			$this->model_barang->pengantaran($id);
+		}
+		$data = $this->db->query("SELECT * FROM tb_data_pesanan inner join stok_barang using(id_barang) where id_pesanan='".$id."'");
+		$query = $data->result_array();
 		// mencetak string
 		$pdf->Cell(190,7,'PT.ADINATA',0,1,'C');
 		$pdf->SetFont('Arial','B',12);
@@ -58,6 +61,6 @@ class Faktur extends CI_Controller {
 		$pdf->cell(30,8,'Rp.'.number_format($total1, 0, ".", "."),1,1,'R');
 		// Memberikan space kebawah agar tidak terlalu rapat
 		$pdf->Output('Faktur.pdf','D');
-		redirect('/');
+		// redirect('/');
 	}
 }

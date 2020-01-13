@@ -16,7 +16,9 @@
         <td><?= $z['nama_bhn']; ?></td>
         <td><?= $z['jumlah']; ?></td>
         <td><?= $z['satuan']; ?></td>
+        <?php if ($this->session->status == "Admin") {?>
         <td><a class="btn btn-info" href="<?= base_url().'bahan/'.$z['id_bahan'] ?>">Tambah Stok</a></td>
+      <?php } ?>
       </tr>
     <?php endforeach; ?>
     </tbody>
